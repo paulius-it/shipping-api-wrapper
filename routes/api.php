@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\UserAccessController;
+use App\Http\Controllers\Api\ShippingApiController;
+use App\Http\Controllers\Api\ShippingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +17,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('shipping-create', [ShippingApiController::class, 'createShippingItem']);
+    Route::post('logout', [UserAccessController::class, 'logout'])->name('user.logout');
+    route::apiResource('shippings', ShippingController::class);
 });
+
+Route::post('register', [UserAccessController::class, 'register'])->name('user.register');
+Route::post('login', [UserAccessController::class, 'login'])->name('user.login');
+
+route::get('/test', [ShippingApiController::class, 'createShippingItem']);

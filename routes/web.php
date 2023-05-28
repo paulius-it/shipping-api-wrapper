@@ -16,3 +16,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+route::get('test', [App\Http\Controllers\Api\ShippingApiController::class, 'createShippingItem'])->name('make-api-call');
